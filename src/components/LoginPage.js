@@ -4,8 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import { logIn } from '../redux/authSlice';
 
 const LoginPage = () => {
+  //gestioneaza starea componentei ,folositpt a gestiona valorile de email si parola ale utiliz precum si mesajele de eroare legate de autentificare
   const [credentials, setCredentials] = useState({ email: '', password: '' });
   const [loginError, setLoginError] = useState('');
+  //hoo de la redux ,este folosit pt a accesa starea de autentificare
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
   const authError = useSelector(state => state.auth.error);
   const dispatch = useDispatch();

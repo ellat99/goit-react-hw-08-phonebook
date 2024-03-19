@@ -1,24 +1,28 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
+//starea componenta a 2 campuri goale
 class ContactForm extends Component {
   state = {
     name: '',
     number: '',
   };
-
+  //responsabila pt actualiz starii cand utiliz introduce valori
   handleChange = event => {
     const { name, value } = event.target;
+    //actualizam starea
     this.setState({ [name]: value });
   };
-
+  //apelata cand formularul e trimis
   handleSubmit = event => {
+    //opreste reincarcarea pag
     event.preventDefault();
+    //extrage valorile name number din starea componentei si le trimite catre functia onAddContact primita ca proprietate
     const { name, number } = this.state;
     this.props.onAddContact(name, number);
+    //reseteaza name,number
     this.setState({ name: '', number: '' });
   };
-
+  //defineste formularul
   render() {
     const { name, number } = this.state;
 
