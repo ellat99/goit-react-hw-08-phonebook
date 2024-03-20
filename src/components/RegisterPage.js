@@ -16,7 +16,7 @@ const RegisterPage = () => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      navigate('/contacts'); // Redirecționarea după înregistrare
+      navigate('/contacts'); 
     }
   }, [isLoggedIn, navigate]);
 
@@ -39,7 +39,7 @@ const RegisterPage = () => {
     e.preventDefault();
     if (userData.password.length < 7) {
       setPasswordError('Password must be at least 7 characters long.');
-      return; // Stop the form submission if the password is too short
+      return; 
     }
     dispatch(register(userData));
   };

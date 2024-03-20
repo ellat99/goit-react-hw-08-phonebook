@@ -8,16 +8,15 @@ import {
   addContact,
   deleteContact,
 } from '../redux/contactsSlice';
-//defineste componenta ca o functie care va returna elem jsx pt pagina telefonului
+
 const ContactsPage = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
   const { items: contacts } = useSelector(state => state.contacts);
   const [filter, setFilter] = useState('');
-  //se incarca contactele at cand utilizatorul este autentificat,este activat atunci cand isLoggedIn se modifica sau cand dispatch este actualizat
+
   useEffect(() => {
     if (isLoggedIn) {
-      //solicita contactele de la server
       dispatch(fetchContacts());
     }
   }, [dispatch, isLoggedIn]);

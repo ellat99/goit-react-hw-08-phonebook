@@ -7,10 +7,10 @@ const Navigation = () => {
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
+  const location = useLocation(); // Obtine locatia curenta
 
-  const handleLogout = async () => {
-    await dispatch(logOut());
+  const handleLogout = () => {
+    dispatch(logOut());
     navigate('/login');
   };
 
@@ -24,12 +24,6 @@ const Navigation = () => {
         <i className="fa-solid fa-address-book"></i> PHONEBOOK
       </h1>
       <div style={styles.links}>
-        <Link
-          to="/contacts"
-          className={`${getLinkClass('/contacts')} ${styles.link}`}
-        >
-          Contacts
-        </Link>
         {isLoggedIn ? (
           <button style={styles.logoutBtn} onClick={handleLogout}>
             Logout
@@ -44,7 +38,7 @@ const Navigation = () => {
             </Link>
             <Link
               to="/login"
-              className={`${getLinkClass('/login')} ${styles.link}`}
+              className={`${getLinkClass('/register')} ${styles.link}`}
             >
               Login
             </Link>
@@ -54,7 +48,6 @@ const Navigation = () => {
     </nav>
   );
 };
-
 const styles = {
   nav: {
     backgroundColor: '#15E5C2',

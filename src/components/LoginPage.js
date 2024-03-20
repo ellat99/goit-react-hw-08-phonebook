@@ -4,18 +4,16 @@ import { useNavigate } from 'react-router-dom';
 import { logIn } from '../redux/authSlice';
 
 const LoginPage = () => {
-  //gestioneaza starea componentei ,folositpt a gestiona valorile de email si parola ale utiliz precum si mesajele de eroare legate de autentificare
   const [credentials, setCredentials] = useState({ email: '', password: '' });
   const [loginError, setLoginError] = useState('');
-  //hoo de la redux ,este folosit pt a accesa starea de autentificare
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
-  const authError = useSelector(state => state.auth.error);
+  const authError = useSelector(state => state.auth.error); // presupunând că există o eroare de autentificare în starea Redux
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
     if (isLoggedIn) {
-      navigate('/contacts');
+      navigate('/contacts'); // Navighează către pagina de contacte după autentificare
     }
   }, [isLoggedIn, navigate]);
 
@@ -25,6 +23,7 @@ const LoginPage = () => {
       ...prevCredentials,
       [name]: value,
     }));
+    // Resetează mesajele de eroare la schimbarea câmpurilor
     setLoginError('');
   };
 
@@ -38,7 +37,7 @@ const LoginPage = () => {
   };
 
   return (
-    <form className="login-form" onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <label>
         Email:
         <input
@@ -46,8 +45,8 @@ const LoginPage = () => {
           name="email"
           value={credentials.email}
           onChange={handleChange}
-          required
           style={styles.input}
+          required
         />
       </label>
       <label>
@@ -61,9 +60,10 @@ const LoginPage = () => {
           autoComplete="current-password"
           style={styles.input}
         />
-        {loginError && <div style={styles.error}>{loginError}</div>}
+        {loginError && <div style={{ color: 'red' }}>{loginError}</div>}
       </label>
-      {authError && <div style={styles.error}>{authError}</div>}
+      {/* Afișarea erorii de autentificare de la server dacă există */}
+      {authError && <div style={{ color: 'red' }}>{authError}</div>}
       <button type="submit" style={styles.button}>
         Login
       </button>
@@ -85,10 +85,6 @@ const styles = {
     borderRadius: '5px',
     padding: '10px 20px',
     cursor: 'pointer',
-  },
-  error: {
-    color: 'red',
-    marginTop: '5px',
   },
 };
 

@@ -16,7 +16,7 @@ export const register = createAsyncThunk(
         }
       );
       if (!response.ok) {
-        const errorData = await response.json(); // Modificat pentru a presupune că răspunsul de eroare vine în format JSON
+        const errorData = await response.json();
         const errorMessages = errorData.message || 'Failed to register';
         console.error('Registration error:', errorMessages);
         return rejectWithValue(errorMessages);
@@ -69,7 +69,7 @@ export const logOut = createAsyncThunk(
         }
       );
       if (!response.ok) throw new Error('Failed to log out');
-      return null; // Nu returnează date semnificative la logout
+      return null;
     } catch (error) {
       return rejectWithValue(error.message);
     }
